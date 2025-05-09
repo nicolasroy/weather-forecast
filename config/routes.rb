@@ -11,4 +11,7 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "posts#index"
+  scope "us" do
+    resources :zip, only: [ :show ], param: :code
+  end
 end
