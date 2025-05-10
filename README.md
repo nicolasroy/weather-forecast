@@ -68,14 +68,21 @@ graph LR
 ## Tasks
 
 - [x] Generate blank Rails app with a database
-- [ ] Generate plain models
-- [ ] Fetch API and load models with data
-- [ ] Display data (controller and views) by ZIP
+- [x] Generate plain models
+- [x] Display data (controller and views) by ZIP
+- [x] Fetch API and load models with data
+- [ ] Extract API service with error handling
 - [ ] Add Memcached
 - [ ] Add a 30 min cache per ZIP
 - [ ] Add ability to input an address
 - [ ] Resolve the ZIP code from the address and redirect to its weather forecast
+- [ ] Add extended forecast
+- [ ] Style the UI
 - [ ] Update this readme for instalation instructions, design trade-offs and considerations.
+
+# Design decisions & Trade-offs
+
+- ***
 
 ---
 

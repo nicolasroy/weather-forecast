@@ -1,6 +1,7 @@
 ENV["RAILS_ENV"] ||= "test"
 require_relative "../config/environment"
 require "rails/test_help"
+require "webmock/minitest"
 
 module ActiveSupport
   class TestCase
@@ -11,5 +12,8 @@ module ActiveSupport
     fixtures :all
 
     # Add more helper methods to be used by all tests here...
+    def fixture_file(path)
+      Rails.root.join("test/fixtures/files", path).read
+    end
   end
 end
