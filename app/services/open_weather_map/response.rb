@@ -1,21 +1,31 @@
-class OpenWeatherMap::Response
-  attr_reader :response
+module OpenWeatherMap
+  class Response
+    attr_reader :status, :response_headers, :body, :url
 
-  def initialize(response)
-    @response = response
-  end
+    def initialize(status: nil, response_headers: {}, body: nil, url: nil)
+      @status = status
+      @response_headers = response_headers
+      @body = body
+      @url = url
+    end
 
-  def success?
-    response.status == 200 && response.body["cod"] == 200
-  end
+    def success?
+      status == 200 && body["cod"] == 200
+    end
 
-  def error_message
-    return body["message"] if body.is_a?(Hash)
+    def retryable?
+      status.to_s.start_with?("5") || retry_after.present?
+    end
 
-    body
-  end
+    def retry_after
+      response_headers["Retry-After"]&.to_i
+    end
 
-  def body
-    response.body
+
+    def error_message
+      return body["message"] if body.is_a?(Hash)
+
+      body
+    end
   end
 end

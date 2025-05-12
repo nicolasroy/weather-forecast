@@ -71,7 +71,7 @@ graph LR
 - [x] Generate plain models
 - [x] Display data (controller and views) by ZIP
 - [x] Fetch API and load models with data
-- [ ] Extract API service with error handling
+- [x] Extract API service with error handling
 - [ ] Add Memcached
 - [ ] Add a 30 min cache per ZIP
 - [ ] Add ability to input an address

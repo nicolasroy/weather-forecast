@@ -1,1 +1,2 @@
-<%= @response.error_message %>
+
+<%= @response.error_message.presence || "An error occurred" %>

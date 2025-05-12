@@ -5,8 +5,7 @@ class OpenWeatherMap::ClientTest < ActiveSupport::TestCase
 
   context "current_weather" do
     should "return a success response" do
-      stub_request(:get, "https://api.openweathermap.org/data/2.5/weather?appid=#{Rails.application.credentials.openweathermap.api_key}&zip=94040,us").
-        to_return(SUCCESS_RESPONSE.merge(body: fixture_file("open_weather_map/current_weather_response.json")))
+      stub_open_weather_map_current_weather("94040")
 
       response = OpenWeatherMap::Client.current_weather("94040")
 
@@ -15,8 +14,11 @@ class OpenWeatherMap::ClientTest < ActiveSupport::TestCase
     end
 
     should "Handle api error response" do
-      stub_request(:get, "https://api.openweathermap.org/data/2.5/weather?appid=#{Rails.application.credentials.openweathermap.api_key}&zip=94040,us").
-        to_return(status: 500)
+      stub_open_weather_map_current_weather("94040", response: {
+        status: 500,
+        headers: {},
+        body: ""
+      })
 
       response = OpenWeatherMap::Client.current_weather("94040")
 
@@ -25,8 +27,9 @@ class OpenWeatherMap::ClientTest < ActiveSupport::TestCase
     end
 
     should "Handle errors in the response body" do
-      stub_request(:get, "https://api.openweathermap.org/data/2.5/weather?appid=#{Rails.application.credentials.openweathermap.api_key}&zip=94040,us").
-        to_return(SUCCESS_RESPONSE.merge(body: { cod: 400, message: "Invalid zip code" }.to_json))
+      stub_open_weather_map_current_weather("94040", response: {
+        body: { cod: 400, message: "Invalid zip code" }.to_json
+      })
 
       response = OpenWeatherMap::Client.current_weather("94040")
 
