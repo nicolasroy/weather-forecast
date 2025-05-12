@@ -1,0 +1,14 @@
+<%= turbo_frame_tag "forecast" do %>
+  Daily forecasts:
+  <ol>
+  <% @response.daily_forecasts.each do |forecast| %>
+    <li>
+      <%= l(forecast.date, format: :short) %>
+      <%= forecast.temperature %>
+      <%= forecast.feels_like %>
+      <%= forecast.high %>
+      <%= forecast.low %>
+    </li>
+  <% end %>
+  </ol>
+<% end %>

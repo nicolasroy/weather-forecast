@@ -1,0 +1,20 @@
+<% content_for :head do %>
+  <script id="search-js" defer src="https://api.mapbox.com/search-js/v1.0.0/web.js"></script>
+<% end %>
+
+<% if @error_message.present? %>
+  <%= @error_message %>
+<% end %>
+
+<%= form_with url: geocode_path, method: :post, data: { controller: "geocode" } do |form| %>
+  <mapbox-geocoder
+    access-token="pk.eyJ1IjoiZGFpdGVuc2hpbnIiLCJhIjoiY21hZ3d3ZjU4MDVvNjJ3b2s0cTFmYXpheSJ9.eRhMo8YVMC-_ErQg0tvMKw"
+    proximity="0,0"
+    data-geocode-target="geocoder"
+  >
+  </mapbox-geocoder>
+
+  <%= form.hidden_field :zip_code, data: { geocode_target: "zipCode" } %>
+  <%= form.hidden_field :country_code, data: { geocode_target: "countryCode" } %>
+
+<% end %>

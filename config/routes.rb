@@ -14,4 +14,9 @@ Rails.application.routes.draw do
   scope "us" do
     resources :zip, only: [ :show ], param: :code
   end
+
+  get ":latitude/:longitude/forecast", to: "forecast#show", as: :forecast, constraints: { latitude: /-?\d+(\.\d+)?/, longitude: /-?\d+(\.\d+)?/ }
+
+  resource :geocode, only: [ :new, :create ], controller: "geocode"
+  root "geocode#new"
 end

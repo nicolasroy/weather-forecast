@@ -10,7 +10,7 @@ module OpenWeatherMap
     end
 
     def success?
-      status == 200 && body["cod"] == 200
+      status == 200 && (body.fetch("cod", 200) == 200)
     end
 
     def retryable?

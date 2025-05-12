@@ -74,9 +74,9 @@ graph LR
 - [x] Extract API service with error handling
 - [ ] Add Memcached
 - [ ] Add a 30 min cache per ZIP
-- [ ] Add ability to input an address
-- [ ] Resolve the ZIP code from the address and redirect to its weather forecast
-- [ ] Add extended forecast
+- [x] Add ability to input an address
+- [x] Resolve the ZIP code from the address and redirect to its weather forecast
+- [x] Add extended forecast
 - [ ] Style the UI
 - [ ] Update this readme for instalation instructions, design trade-offs and considerations.
 

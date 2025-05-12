@@ -6,3 +6,7 @@
 <div>feels like: <%= @current_condition.feels_like %></div>
 <div>high: <%= @current_condition.high %></div>
 <div>low: <%= @current_condition.low %></div>
+
+<%= turbo_frame_tag "forecast", src: forecast_path(@area.latitude, @area.longitude) do %>
+
+<% end %>
