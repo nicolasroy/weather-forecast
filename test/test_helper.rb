@@ -23,7 +23,7 @@ module ActiveSupport
         body: fixture_file("open_weather_map/current_weather_response.json")
       }
 
-      stub_request(:get, "https://api.openweathermap.org/data/2.5/weather?appid=#{Rails.application.credentials.openweathermap.api_key}&zip=#{zip_code},us").
+      stub_request(:get, "https://api.openweathermap.org/data/2.5/weather?appid=#{OpenWeatherMap::Client.api_key}&zip=#{zip_code},us").
         to_return(default_response.merge(response))
     end
 
@@ -34,7 +34,7 @@ module ActiveSupport
         body: fixture_file("open_weather_map/one_call_response.json")
       }
 
-      stub_request(:get, "https://api.openweathermap.org/data/3.0/onecall?appid=#{Rails.application.credentials.openweathermap.api_key}&exclude=current,minutely,hourly,alerts&lat=#{latitude}&lon=#{longitude}").
+      stub_request(:get, "https://api.openweathermap.org/data/3.0/onecall?appid=#{OpenWeatherMap::Client.api_key}&exclude=current,minutely,hourly,alerts&lat=#{latitude}&lon=#{longitude}").
         to_return(default_response.merge(response))
     end
   end

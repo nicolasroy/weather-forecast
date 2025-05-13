@@ -14,6 +14,12 @@ module OpenWeatherMap
         cached_request(OneCallResponse, "/data/3.0/onecall", lat: latitude, lon: longitude, exclude: exclusions.join(","))
       end
 
+      def api_key
+        return "test" if Rails.env.test?
+
+        Rails.application.credentials.openweathermap.api_key
+      end
+
       private
 
       # TODO: make the Response class know it came from cache
@@ -39,7 +45,6 @@ module OpenWeatherMap
       end
 
       def connection
-        api_key = Rails.application.credentials.openweathermap.api_key
         Faraday.new(url: BASE_URL, params: { appid: api_key }) do |f|
           f.request :json
           f.response :json
