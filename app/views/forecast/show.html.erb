@@ -7,7 +7,7 @@
       <% next if forecast.date.today? %>
       <li>
         <%= forecast.date.strftime("%a") %>
-        <%= forecast.temperature %>
+        <%= kelvin_to_f(forecast.temperature) %>°
         <%# <%= forecast.feels_like %>
         <%# <%= forecast.high %>
         <%# <%= forecast.low %>
