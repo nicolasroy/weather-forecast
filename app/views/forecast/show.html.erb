@@ -1,14 +1,18 @@
 <%= turbo_frame_tag "forecast" do %>
-  Daily forecasts:
-  <ol>
-  <% @response.daily_forecasts.each do |forecast| %>
-    <li>
-      <%= l(forecast.date, format: :short) %>
-      <%= forecast.temperature %>
-      <%= forecast.feels_like %>
-      <%= forecast.high %>
-      <%= forecast.low %>
-    </li>
-  <% end %>
-  </ol>
+  <div class="bg-neutral-900/20 backdrop-blur-lg border border-neutral-500/10 rounded-lg p-4 text-white mx-auto w-3xs">
+    Daily forecasts
+    <ol>
+
+    <% @response.daily_forecasts.each do |forecast| %>
+      <% next if forecast.date.today? %>
+      <li>
+        <%= forecast.date.strftime("%a") %>
+        <%= forecast.temperature %>
+        <%# <%= forecast.feels_like %>
+        <%# <%= forecast.high %>
+        <%# <%= forecast.low %>
+      </li>
+    <% end %>
+    </ol>
+  </div>
 <% end %>

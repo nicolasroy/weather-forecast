@@ -2,19 +2,22 @@
   <script id="search-js" defer src="https://api.mapbox.com/search-js/v1.0.0/web.js"></script>
 <% end %>
 
-<% if @error_message.present? %>
-  <%= @error_message %>
-<% end %>
+<section class="w-md mx-auto">
+  <h1 class="text-2xl mb-2 text-white">Search for a US address</h1>
+  <% if @error_message.present? %>
+    <%= @error_message %>
+  <% end %>
 
-<%= form_with url: geocode_path, method: :post, data: { controller: "geocode" } do |form| %>
-  <mapbox-geocoder
-    access-token="pk.eyJ1IjoiZGFpdGVuc2hpbnIiLCJhIjoiY21hZ3d3ZjU4MDVvNjJ3b2s0cTFmYXpheSJ9.eRhMo8YVMC-_ErQg0tvMKw"
-    proximity="0,0"
-    data-geocode-target="geocoder"
-  >
-  </mapbox-geocoder>
+  <%= form_with url: geocode_path, method: :post, data: { controller: "geocode" } do |form| %>
+    <mapbox-geocoder
+      access-token="pk.eyJ1IjoiZGFpdGVuc2hpbnIiLCJhIjoiY21hZ3d3ZjU4MDVvNjJ3b2s0cTFmYXpheSJ9.eRhMo8YVMC-_ErQg0tvMKw"
+      proximity="0,0"
+      data-geocode-target="geocoder"
+    >
+    </mapbox-geocoder>
 
-  <%= form.hidden_field :zip_code, data: { geocode_target: "zipCode" } %>
-  <%= form.hidden_field :country_code, data: { geocode_target: "countryCode" } %>
+    <%= form.hidden_field :zip_code, data: { geocode_target: "zipCode" } %>
+    <%= form.hidden_field :country_code, data: { geocode_target: "countryCode" } %>
 
-<% end %>
+  <% end %>
+</section>
