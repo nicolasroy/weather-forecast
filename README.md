@@ -79,14 +79,17 @@ _A database is not yet needed at this stage._
 ## Design decisions & Trade-offs
 
 **Delayed worldwide coverage**
+
 Because few countries have ZIP code, caching by it would be impractical. New routes with another cache key would be needed. Due to the requirement of caching by ZIP, I did not explore solving this.
 
 **Non-address locations**
+
 The MapBox plug-in lists places that don't have address such as cities, regions, states or countries. Selecting one of those is not yet supported. Filtering the geocoding results would provide better UX for minimal effort.
 
 With routes that are not limited by a ZIP code, we could improve the user experience by supporting weather for a city, district or neighborhood.
 
 **ETag optimization**
+
 Strict ETags are well suited for this app and would reduce the server load by removing the need for view rendering for requests with mathing Etags. To do so, the text for the cache indicator would be updated by a Stimulus controller to remain accurate.
 
 # Development
@@ -95,7 +98,8 @@ Strict ETags are well suited for this app and would reduce the server load by re
 
 1. Install dependencies with `brew install memcached`
 2. Install gems with `bundle install`
-3. Enable caching with `rails dev:cache`. Clearing it is done by running `Rails.cache.clear` in a Rails console.
+3. Get a copy of `config/master.key`. It should have been provided as a URL to a Gist.
+4. Enable caching with `rails dev:cache`. Clearing it is done by running `Rails.cache.clear` in a Rails console.
 
 ### Server
 
