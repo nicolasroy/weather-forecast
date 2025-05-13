@@ -4,6 +4,9 @@
 
 This app allows a person to get a weather forecast for their address.
 
+<img width="390" alt="image" src="https://github.com/user-attachments/assets/841b3ff2-27d9-472a-84c1-5763ce4ca885" />
+
+
 ##### Functional requirements
 
 - Accept an address as input
