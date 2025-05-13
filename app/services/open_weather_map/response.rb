@@ -13,6 +13,9 @@ module OpenWeatherMap
       status == 200 && (body.fetch("cod", 200) == 200)
     end
 
+    def failure?
+      !success?
+    end
     def retryable?
       status.to_s.start_with?("5") || retry_after.present?
     end

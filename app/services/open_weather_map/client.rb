@@ -6,16 +6,27 @@ module OpenWeatherMap
 
     class << self
       def current_weather(zip_code)
-        request(CurrentWeatherResponse, "/data/2.5/weather", zip: "#{zip_code},us")
+        cached_request(CurrentWeatherResponse, "/data/2.5/weather", zip: "#{zip_code},us")
       end
 
       def one_call(latitude, longitude)
         exclusions = %w[current minutely hourly alerts]
-
-        request(OneCallResponse, "/data/3.0/onecall", lat: latitude, lon: longitude, exclude: exclusions.join(","))
+        cached_request(OneCallResponse, "/data/3.0/onecall", lat: latitude, lon: longitude, exclude: exclusions.join(","))
       end
 
       private
+
+      def cached_request(response_class, endpoint, params)
+        cache_key = params.values.join(",")
+
+        cached_response = Rails.cache.read(cache_key)
+        return cached_response if cached_response
+
+        response = request(response_class, endpoint, params)
+        Rails.cache.write(cache_key, response, expires_in: 30.minutes) unless response.failure? && response.retryable?
+
+        response
+      end
 
       def request(response_class, endpoint, params)
         response = connection.get(endpoint, params)

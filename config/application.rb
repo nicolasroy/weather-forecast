@@ -25,5 +25,7 @@ module WeatherForecast
     #
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
+
+    config.cache_store = :mem_cache_store
   end
 end
