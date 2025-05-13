@@ -16,6 +16,7 @@ module OpenWeatherMap
 
       private
 
+      # TODO: make the Response class know it came from cache
       def cached_request(response_class, endpoint, params)
         cache_key = params.values.join(",")
 
@@ -23,6 +24,8 @@ module OpenWeatherMap
         return cached_response if cached_response
 
         response = request(response_class, endpoint, params)
+        response.cached_on = Time.now
+        Rails.logger.info("Caching response for #{cache_key} with #{response.inspect}")
         Rails.cache.write(cache_key, response, expires_in: 30.minutes) unless response.failure? && response.retryable?
 
         response

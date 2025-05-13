@@ -7,10 +7,16 @@
   </div>
   <div>feels like: <%= kelvin_to_f(@current_condition.feels_like) %>℉</div>
 
- <div>
-  <span><abbr title="high" style="text-decoration: none;">H</abbr>: <%= kelvin_to_f(@current_condition.high) %>°</span>
-  <span><abbr title="low" style="text-decoration: none;">L</abbr>: <%= kelvin_to_f(@current_condition.low) %>°</span>
- </div>
+  <div>
+    <span><abbr title="high" style="text-decoration: none;">H</abbr>: <%= kelvin_to_f(@current_condition.high) %>°</span>
+    <span><abbr title="low" style="text-decoration: none;">L</abbr>: <%= kelvin_to_f(@current_condition.low) %>°</span>
+  </div>
+
+  <% unless @response.recent? %>
+    <div class="text-sm italic text-blue-200">
+    as of <%= time_ago_in_words(@response.cached_on) %> ago
+    </div>
+  <% end %>
 </div>
 
 <%= turbo_frame_tag "forecast", src: forecast_path(@area.latitude, @area.longitude) do %>
