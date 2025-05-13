@@ -14,7 +14,7 @@
 
   <% unless @response.recent? %>
     <div class="text-sm italic text-blue-200">
-    as of <%= time_ago_in_words(@response.cached_on) %> ago
+    as of <%= time_tag @response.cached_on, time_ago_in_words(@response.cached_on) %> ago
     </div>
   <% end %>
 </div>

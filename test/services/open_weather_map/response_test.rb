@@ -3,14 +3,14 @@ require "test_helper"
 module OpenWeatherMap
   class ResponseTest < ActiveSupport::TestCase
     context "recent?" do
-      should "return true when response is less than 30 seconds old" do
-        response = OpenWeatherMap::Response.new(cached_on: 10.seconds.ago)
+      should "return true when response is less than 5 seconds old" do
+        response = OpenWeatherMap::Response.new(cached_on: 1.seconds.ago)
 
         assert_predicate response, :recent?
       end
 
-      should "return false when response is more than 30 seconds old" do
-        response = OpenWeatherMap::Response.new(cached_on: 31.seconds.ago)
+      should "return false when response is more than 5 seconds old" do
+        response = OpenWeatherMap::Response.new(cached_on: 6.seconds.ago)
 
         assert_not_predicate response, :recent?
       end

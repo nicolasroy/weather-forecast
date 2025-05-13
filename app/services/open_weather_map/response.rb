@@ -20,7 +20,7 @@ module OpenWeatherMap
     end
 
     def recent?
-      cached_on.nil? || cached_on > 30.seconds.ago
+      cached_on.nil? || cached_on > 5.seconds.ago
     end
 
     def retryable?
