@@ -23,10 +23,16 @@ module OpenWeatherMap
         assert_predicate response, :retryable?
       end
 
-      should "return true when the server returns a 5xx status code" do
+      should "return true when a Retry-After header is present" do
         response = OpenWeatherMap::Response.new(response_headers: { "Retry-After" => 1 })
 
         assert_predicate response, :retryable?
+      end
+
+      should "return false when the server response is successful" do
+        response = OpenWeatherMap::Response.new(status: 200)
+
+        assert_not_predicate response, :retryable?
       end
     end
   end
