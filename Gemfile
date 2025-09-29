@@ -67,6 +67,6 @@ group :test do
   gem "shoulda", "~> 4.0"
 end
 
-gem "faraday", "~> 2.13"
+gem "faraday", "~> 2.14"
 
 gem "tailwindcss-rails", "~> 4.2"
