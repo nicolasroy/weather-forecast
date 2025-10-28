@@ -69,4 +69,4 @@ end
 
 gem "faraday", "~> 2.13"
 
-gem "tailwindcss-rails", "~> 4.2"
+gem "tailwindcss-rails", "~> 4.4"
